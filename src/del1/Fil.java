@@ -37,28 +37,46 @@ public class Fil {
 
 	public static Filmarkiv lesFil(String filnavn) {
 		try {
-		final String SKILLE = "#";
-		Scanner leser = new Scanner(new File(filnavn));
+		String SKILLE = "#";
+		String plassering = "C:\\Users\\Elev\\Documents\\1-Informasjonsteknologi\\Eclipse\\DAT102 øving2\\src\\del1\\";
+		Scanner innfil = new Scanner(new File(plassering+filnavn));
 		
-		int antall = Integer.parseInt(leser.nextLine());
+		BufferedReader leser = new BufferedReader(new FileReader(plassering+filnavn));
+		
+		System.out.println("50");
+		
+		int antall = 0; 
+		antall = Integer.parseInt(leser.readLine());
 		Filmarkiv filmer = new Filmarkiv(antall);	//oppretter filmarkivet
 		
 		for (int i=0; i<antall; i++) {
-			while(leser.hasNext()) {
-				//System.out.println(leser.next(SKILLE));
-				int filmnr = Integer.parseInt(leser.next(SKILLE));
-				String produsent = leser.next(SKILLE);
-				String tittel = leser.next(SKILLE);
-				int aar = Integer.parseInt(leser.next(SKILLE));
-				Sjanger sjanger = Sjanger.finnSjanger(leser.next(SKILLE));
-				String filmselskap = leser.next(SKILLE);
+			//while(leser.hasNext()) {
+				System.out.println("28");
+				
+	            String post = leser.readLine();
+	            
+                String[] felt = post.split(SKILLE);
 
-				filmer.leggTilFilm(new Film(filmnr, produsent, tittel, aar, sjanger, filmselskap));
-			}
+				int filmnr = Integer.parseInt(felt[0]);
+				String produsent = felt[1];
+				System.out.println("Produsent: " + produsent);
+
+				String tittel = felt[2];
+				int aar = Integer.parseInt(felt[3]);
+				Sjanger sjanger = Sjanger.finnSjanger(felt[4]);
+				String filmselskap = felt[5];
+
+				boolean lagtTil = filmer.leggTilFilm(new Film(filmnr, produsent, tittel, aar, sjanger, filmselskap));
+				System.out.println(lagtTil);
+			//}
 		}
 		return filmer;
 		
 		} catch (FileNotFoundException e) {
+			System.out.println("Fil ikkje fonnet");
+			return null;
+			
+		} catch (IOException e) {
 			System.out.println("Fil ikkje fonnet");
 			return null;
 		}

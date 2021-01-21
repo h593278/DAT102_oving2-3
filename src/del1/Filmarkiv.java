@@ -18,14 +18,20 @@ public class Filmarkiv implements FILMarkivADT{
 	
 	// Legger til en ny Film
 	public boolean leggTilFilm(Film nyFilm) {
-		for(int i=0; i<=antall; i++) {
+
+		for(int i=0; i<antall; i++) {
+
 			if (filmer[i].getFilmnr() == nyFilm.getFilmnr()) {
 				return false;
+				
 			}
+
 		}
 		if (antall<filmer.length) {
+
 			filmer[antall]=nyFilm;
 			antall++;
+
 			return true;
 		}
 		return false;
@@ -87,7 +93,7 @@ public class Filmarkiv implements FILMarkivADT{
 			return trimTab(filmtab2, n);
 	 }
 	
-	// Henter antall Filmer for en gitt sjanger
+	 // Henter antall Filmer for en gitt sjanger
 	 public int antall (Sjanger sjanger) {
 		 Film[] filmtab2 = new Film[antall];
 			int n=0;
@@ -98,12 +104,19 @@ public class Filmarkiv implements FILMarkivADT{
 					n++;	
 				}
 			}
+
 			return n;
 	 }
 	
 	 // Returnerer antall Filmer
 	 public int antall() {
 		 return antall;
+	 }
+	 
+	 public void skrivUt() {
+		 for (int i=0; i<antall; i++) {
+			 System.out.println(filmer[i].toString());
+		 }
 	 }
 	
 }

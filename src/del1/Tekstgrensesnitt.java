@@ -11,19 +11,28 @@ public class Tekstgrensesnitt {
 				String filnamn = showInputDialog("Kva filmarkiv vil du hente fram?");
 			
 				Filmarkiv filmer = Fil.lesFil(filnamn);
+				
 				boolean Ferdig=false;
-				while (!Ferdig)
-				int valg = parseInt(showInputDialog("1 nyfilm \n2 slett fil\n3 soke etter tittel\n"
-						+ "4 søke etter produsent\n5 søke etter sjanger\n 6 for å skirve ut\n"
-						+ " 0 for å avslutte"));
+				
+				while (!Ferdig) {
+				int valg = parseInt(showInputDialog("1 nyfilm\n2 slett fil\n3 soke etter tittel\n"
+						+ "4 søke etter produsent\n5 Antall i gitt sjanger\n6 for å skirve ut\n"
+						+ "0 for å avslutte"));
 				
 				switch(valg) {
 				  case 0:
 				    Ferdig=true;
 				    break;
 				  case 1:
-					  showInputDialog(
-				    break;
+					  	int filmnr = Integer.parseInt(showInputDialog("Filmnr"));
+						String produsent = showInputDialog("Produsent");
+						String tittel = showInputDialog("Titttel");
+						int aar = Integer.parseInt(showInputDialog("År"));
+						Sjanger sjanger1 = Sjanger.finnSjanger(showInputDialog("Sjanger"));
+						String filmselskap = showInputDialog("Filmselskap");
+
+						filmer.leggTilFilm(new Film(filmnr, produsent, tittel, aar, sjanger1, filmselskap));
+					  	break;
 				  case 2:
 					    // code block
 					    break;
@@ -34,13 +43,15 @@ public class Tekstgrensesnitt {
 					    // code block
 					    break;
 				  case 5:
-					    // code block
+					  	String sjanger = showInputDialog("Hvilken sjanger");
+					  	System.out.println(filmer.antall(Sjanger.finnSjanger(sjanger)));
 					    break;
 				  case 6:
-					    // code block
+					    filmer.skrivUt();
 					    break;
 				  default:
 				    // code block
+				}
 				}
 				
 			} else if (svar==0) {
@@ -51,4 +62,5 @@ public class Tekstgrensesnitt {
 			}
 		} while(svar!=0 || svar!=1);
 	}
+	
 }
