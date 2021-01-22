@@ -72,5 +72,15 @@ public class Film {
 	public void setFilmselskap(String filmselskap) {
 		this.filmselskap = filmselskap;
 	}
+//	nt filmnr;
+//	private String produsent;
+//	private String tittel;
+//	private int aar;
+//	private Sjanger sjanger;
+//	private String filmselskap;
+	public String toString() {
+		return "Filmnr: " + filmnr + ", Produsent: " + produsent + ", tittel: "
+				+ tittel + ", År: " +aar +", Sjanger: " + sjanger + ", Filmselskap:" + filmselskap;
+	}
 }
 

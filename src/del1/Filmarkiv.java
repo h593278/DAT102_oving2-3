@@ -1,6 +1,6 @@
 package del1;
 
-import packageno.hvl.data102.adt.FILMarkivADT;
+import no.hvl.data102.adt.FILMarkivADT;
 
 public class Filmarkiv implements FILMarkivADT{
 	private Film[] filmer;
@@ -22,16 +22,24 @@ public class Filmarkiv implements FILMarkivADT{
 		for(int i=0; i<antall; i++) {
 
 			if (filmer[i].getFilmnr() == nyFilm.getFilmnr()) {
+				System.out.println("Legger ikkje til fil");
 				return false;
 				
 			}
 
 		}
+		if (antall>=filmer.length) {
+			Film[] x = new Film[antall*2];
+			for (int i=0; i<antall; i++) {
+				x[i]=filmer[i];
+			}
+			filmer=x;
+		}
 		if (antall<filmer.length) {
-
+			//System.out.println("Legg til ");
 			filmer[antall]=nyFilm;
 			antall++;
-
+			//System.out.println("Og det nye antallet er: "+antall);
 			return true;
 		}
 		return false;
@@ -56,7 +64,7 @@ public class Filmarkiv implements FILMarkivADT{
 		Film[] filmtab2 = new Film[antall];
 		int n=0;
 		
-		for (int i=0; i<filmer.length; i++) {
+		for (int i=0; i<antall; i++) {
 			if (filmer[i].getTittel().contains(delstreng)) {
 				filmtab2[n]=filmer[i];
 				n++;	
@@ -99,9 +107,11 @@ public class Filmarkiv implements FILMarkivADT{
 			int n=0;
 			
 			for (int i=0; i<filmer.length; i++) {
-				if (filmer[i].getSjanger() == sjanger) {
-					filmtab2[n]=filmer[i];
-					n++;	
+				if (filmer[i].getSjanger()!=null) {
+					if (filmer[i].getSjanger().equals(sjanger)){
+						filmtab2[n]=filmer[i];
+						n++;	
+					}
 				}
 			}
 
@@ -113,10 +123,12 @@ public class Filmarkiv implements FILMarkivADT{
 		 return antall;
 	 }
 	 
-	 public void skrivUt() {
+	 public String skrivUt() {
+		 String svar="";
 		 for (int i=0; i<antall; i++) {
-			 System.out.println(filmer[i].toString());
+			 svar += filmer[i].toString()+"\n";
 		 }
+		 return svar;
 	 }
 	
 }

@@ -14,12 +14,15 @@ public class Fil {
 
 	public static void skrivTilFil(String filnavn, Filmarkiv filmer) {
 		try {
-
-			PrintWriter skriver = new PrintWriter(filnavn);
+			String plassering = "C:\\Users\\Elev\\Documents\\1-Informasjonsteknologi\\Eclipse\\DAT102 øving2\\src\\del1\\";
+			PrintWriter skriver = new PrintWriter(plassering+filnavn);
 
 			skriver.println(filmer.antall());
+			//System.out.println("a");
 
 			for (int i = 0; i < filmer.antall(); i++) {
+				//System.out.println(filmer.antall());
+
 				Film film = filmer.hentFilmTabell()[i];
 				skriver.print(film.getFilmnr()+"#");
 				skriver.print(film.getProdusent()+"#");
@@ -27,8 +30,9 @@ public class Fil {
 				skriver.print(film.getAar()+"#");
 				skriver.print(film.getSjanger()+"#");
 				skriver.println(film.getFilmselskap());
+				//System.out.println("b");
 			}
-
+			skriver.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Fil ikkje fonnet");			
 		}
@@ -43,7 +47,7 @@ public class Fil {
 		
 		BufferedReader leser = new BufferedReader(new FileReader(plassering+filnavn));
 		
-		System.out.println("50");
+		System.out.println("Leser fil");
 		
 		int antall = 0; 
 		antall = Integer.parseInt(leser.readLine());
@@ -51,7 +55,6 @@ public class Fil {
 		
 		for (int i=0; i<antall; i++) {
 			//while(leser.hasNext()) {
-				System.out.println("28");
 				
 	            String post = leser.readLine();
 	            
@@ -59,7 +62,6 @@ public class Fil {
 
 				int filmnr = Integer.parseInt(felt[0]);
 				String produsent = felt[1];
-				System.out.println("Produsent: " + produsent);
 
 				String tittel = felt[2];
 				int aar = Integer.parseInt(felt[3]);
@@ -67,9 +69,13 @@ public class Fil {
 				String filmselskap = felt[5];
 
 				boolean lagtTil = filmer.leggTilFilm(new Film(filmnr, produsent, tittel, aar, sjanger, filmselskap));
-				System.out.println(lagtTil);
+				System.out.println("Blir han lagt til? " + lagtTil);
+				System.out.println("antall elemeter " + filmer.antall());
+
+
 			//}
 		}
+		leser.close();
 		return filmer;
 		
 		} catch (FileNotFoundException e) {
