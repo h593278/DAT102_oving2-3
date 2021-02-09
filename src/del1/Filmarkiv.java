@@ -71,9 +71,6 @@ public class Filmarkiv implements FILMarkivADT{
 			}
 		}
 		return trimTab(filmtab2, n);
-	
-		
-		
 	}
 	
 	//trimmer
@@ -130,5 +127,4 @@ public class Filmarkiv implements FILMarkivADT{
 		 }
 		 return svar;
 	 }
-	
 }
