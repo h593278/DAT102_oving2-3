@@ -43,7 +43,7 @@ public class Filmarkiv2 implements FILMarkivADT{
 			antall--;
 			return true;
 		} else {
-			neste=neste.getNeste();	//Her blir neste og forrige ulike
+			neste = neste.getNeste();	//Her blir neste og forrige ulike
 			for (int i=1; i<antall && neste!=null; i++) {
 				if (neste.getElement().getFilmnr()==filmnr) {
 					//Kjekke om det er det siste elemente
@@ -55,8 +55,8 @@ public class Filmarkiv2 implements FILMarkivADT{
 					antall--;
 					return true;
 				}
-				forrige=neste;
-				neste=neste.getNeste();
+				forrige = neste;
+				neste = neste.getNeste();
 			}
 		}
 		return false;
@@ -70,7 +70,7 @@ public class Filmarkiv2 implements FILMarkivADT{
 		
 		for (int i=0; i<antall; i++) {
 			if (neste.getElement().getTittel().contains(delstreng)) {
-				filmer[pos]=neste.getElement();
+				filmer[pos] = neste.getElement();
 				pos++;
 			}
 			neste=neste.getNeste();
@@ -80,16 +80,16 @@ public class Filmarkiv2 implements FILMarkivADT{
 	 
 	 @Override
 	 public Film[] soekProdusent(String delstreng) {
-		Film[] filmer= new Film[antall];
+		Film[] filmer = new Film[antall];
 		LinearNode<Film> neste = start;
 		int pos=0;
 		
 		for (int i=0; i<antall; i++) {
 			if (neste.getElement().getProdusent().contains(delstreng)) {
-				filmer[pos]=neste.getElement();
+				filmer[pos] = neste.getElement();
 				pos++;
 			}
-			neste=neste.getNeste();
+			neste = neste.getNeste();
 		}
 		return trimTab(filmer, pos);
 	 }
@@ -107,13 +107,13 @@ public class Filmarkiv2 implements FILMarkivADT{
 	 @Override
 	 public int antall (Sjanger sjanger) {
 		LinearNode<Film> neste = start;
-		int antalFilmer=0;
+		int antalFilmer = 0;
 			
 			for (int i=0; i<antall; i++) {
 				if (neste.getElement().getSjanger()==sjanger) {
 					antalFilmer++;
 				}
-				neste=neste.getNeste();
+				neste = neste.getNeste();
 			}
 			return antalFilmer;
 		 }
@@ -121,5 +121,17 @@ public class Filmarkiv2 implements FILMarkivADT{
 	 @Override
 	 public int antall() {
 		 return antall;
+	 }
+	 
+	 //For å skrive ut filmarkivet
+	 public String skrivUt() {
+		 String svar="";
+		 LinearNode<Film> neste = start;
+		 
+		 for (int i=0; i<antall && neste!=null; i++) {
+			 svar += neste.getElement().toString()+"\n";
+			 neste = neste.getNeste();
+		 }
+		 return svar;
 	 }
 }
